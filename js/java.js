@@ -1,4 +1,10 @@
-'requires'; 'random'
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+const resultDiv = document.querySelector('#result');
+const scoreDiv = document.querySelector('#score');
+
+const random = require('random');
 
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors'];
@@ -34,36 +40,20 @@ function playRound(playerSelection, computerSelection) {
   return outcomes[playerSelection][computerSelection];
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
+rockButton.addEventListener('click', () => {
+  const result = playRound('rock', getComputerChoice());
+  resultDiv.textContent = result;
+});
 
-  for (let i = 0; i < 5; i++) {
-    // Get the player's and computer's choices
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
+paperButton.addEventListener('click', () => {
+  const result = playRound('paper', getComputerChoice());
+  resultDiv.textContent = result;
+});
 
-    // Play a round and get the result
-    const result = playRound(playerSelection, computerSelection);
+scissorsButton.addEventListener('click', () => {
+  const result = playRound('scissors', getComputerChoice());
+  resultDiv.textContent = result;
+});
 
-    // Update the scores based on the result
-    if (result.startsWith('You Win!')) {
-      playerScore++;
-    } else if (result.startsWith('You Lose!')) {
-      computerScore++;
-    }
-
-    console.log(`Round ${i + 1}: ${result}`);
-  }
-
-  // Declare the winner or loser
-  if (playerScore > computerScore) {
-    console.log('You Win the Game!');
-  } else if (playerScore < computerScore) {
-    console.log('You Lose the Game!');
-  } else {
-    console.log('The Game is a Tie!');
-  }
-}
 
 
